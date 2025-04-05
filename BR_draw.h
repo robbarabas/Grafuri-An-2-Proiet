@@ -9,7 +9,17 @@
 #include <set>
 #include <algorithm>
 #include <limits>
+#include <string>
 using namespace std;
+
+void setColor(int color) {
+    std::cout << "\033[1;" << color << "m"; 
+}
+
+
+void resetColor() {
+    std::cout << "\033[0m"; 
+}
 class draw_matrix
 {
 public:
@@ -26,7 +36,9 @@ public:
         for (int i = 0; i < Len; i++) {
             Mat[i] = new char[Wth];
             for (int j = 0; j < Wth; j++) {
-                Mat[i][j] = ' ';
+               
+                Mat[i][j] =' ';
+
             }
         }
     }
@@ -38,7 +50,7 @@ public:
         for (int i = 0; i < Len; i++) {
             Mat[i] = new char[Wth];
             for (int j = 0; j < Wth; j++) {
-                Mat[i][j] = ' ';
+                Mat[i][j] =' ';
             }
         }
     }
@@ -53,13 +65,35 @@ public:
         }
     }
 
-    // Print the matrix
     void print()
     {
         for (int i = 0; i < Len; i++) {
             for (int j = 0; j < Wth; j++) {
-               
+                switch (Mat[i][j])
+                {
+                case('F'):
+                    setColor(32);
+                    break;
+                case('A'):
+                     setColor(31);
+                     break;
+                case('-'):
+                      setColor(35);
+                      break;
+                case('*'):
+                    setColor(33);
+                    break;
+                case('0'):
+                    setColor(31);
+                    break;
+                default:
+                    setColor(36);
+                    break;
+                      
+
+                }
                 cout <<" " <<Mat[i][j];
+                resetColor();
             }
             cout << endl;
         }

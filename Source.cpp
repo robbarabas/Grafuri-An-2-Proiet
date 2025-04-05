@@ -275,6 +275,7 @@ int main() {
         cout << "2. Cel mai scurt drum (de la un nod sursa)\n";
         cout << "3. Arbore partial minim\n";
         cout << "4. Cuplaje in graf\n";
+        cout << "5. Reseteaza Graficul";
         cout << "Alege optiunea: ";
         cin >> choice;
 
@@ -304,7 +305,8 @@ int main() {
             canvas.print();
             break;
         case 5:
-            return 0;
+            G.draw(canvas); 
+            break;
         default:
             cout << "Optiune invalida.\n";
         }
