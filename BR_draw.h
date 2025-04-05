@@ -7,10 +7,10 @@ public:
     int Len, Wth;
     char** Mat;
 
-    // Default constructor
+
     draw_matrix() : Len(0), Wth(0), Mat(nullptr) {}
 
-    // Constructor for square matrix (Len x Len)
+   
     draw_matrix(int _Len) : Len(_Len), Wth(_Len)
     {
         Mat = new char* [Len];
