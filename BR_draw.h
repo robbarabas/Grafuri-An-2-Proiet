@@ -1,5 +1,14 @@
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <limits>
 using namespace std;
 class draw_matrix
 {
@@ -22,7 +31,7 @@ public:
         }
     }
 
-    // Constructor for rectangular matrix (Len x Wth)
+
     draw_matrix(int _Len, int _Wth) : Len(_Len), Wth(_Wth)
     {
         Mat = new char* [Len];
@@ -34,7 +43,7 @@ public:
         }
     }
 
-    // Destructor to free allocated memory
+
     ~draw_matrix()
     {
         if (Mat) {
@@ -49,7 +58,8 @@ public:
     {
         for (int i = 0; i < Len; i++) {
             for (int j = 0; j < Wth; j++) {
-                cout << Mat[i][j];
+               
+                cout <<" " <<Mat[i][j];
             }
             cout << endl;
         }
