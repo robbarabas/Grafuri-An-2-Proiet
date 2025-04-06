@@ -1,6 +1,6 @@
 ﻿
 #include "BR_draw.h"
-
+#include <chrono>
 using namespace std;
 draw_matrix canvas(100, 100);
 
@@ -142,7 +142,6 @@ public:
         }
 
         cout << (connected ? "Graful este conex.\n" : "Graful NU este conex.\n");
-        canvas.print(); 
     }
 
 
@@ -159,7 +158,7 @@ public:
             pq.erase(pq.begin());
             for (int i = 0; i < Noduri[node].adj_size; i++) {
                 int to = Noduri[node].adj[i];
-                if (dist[node] + 1 < dist[to]) {
+                if (dist[node] + 1 < dist[to]&&Noduri[to].type==FOOD) {
                     pq.erase({ dist[to], to });
                     dist[to] = dist[node] + 1;
                     pq.insert({ dist[to], to });
@@ -241,7 +240,7 @@ public:
             if (matched.count(i)) continue;
             for (int j = 0; j < Noduri[i].adj_size; j++) {
                 int v = Noduri[i].adj[j];
-                if (!matched.count(v)) {
+                if (!matched.count(v)&&Noduri[v].type!=Noduri[i].type) {
                     cout << index_to_name[i] << " - " << index_to_name[v] << endl;
                     matched.insert(i);
                     matched.insert(v);
@@ -278,17 +277,27 @@ int main() {
         cout << "5. Reseteaza Graficul";
         cout << "Alege optiunea: ";
         cin >> choice;
-
         switch (choice) {
-        case 1:
+        case 1: {
+            auto start = chrono::high_resolution_clock::now();
             G.check_connectivity(canvas);
+           
+            auto end = chrono::high_resolution_clock::now();
+            chrono::duration<double> elapsed = end - start;
+            cout << "Timp de executie: " << elapsed.count() << " secunde.\n";
+            canvas.print();
             break;
+        }
         case 2: {
             string name;
             cout << "Introdu numele nodului sursa: ";
             cin >> name;
             if (G.name_to_index.count(name)) {
+                auto start = chrono::high_resolution_clock::now();
                 G.dijkstra(G.name_to_index[name]);
+                auto end = chrono::high_resolution_clock::now();
+                chrono::duration<double> elapsed = end - start;
+                cout << "Timp de executie: " << elapsed.count() << " secunde.\n";
             }
             else {
                 cout << "Nod inexistent.\n";
@@ -296,20 +305,31 @@ int main() {
             canvas.print();
             break;
         }
-        case 3:
+        case 3: {
+            auto start = chrono::high_resolution_clock::now();
             G.kruskal();
+            auto end = chrono::high_resolution_clock::now();
+            chrono::duration<double> elapsed = end - start;
+            cout << "Timp de executie: " << elapsed.count() << " secunde.\n";
             canvas.print();
             break;
-        case 4:
+        }
+        case 4: {
+            auto start = chrono::high_resolution_clock::now();
             G.matching();
+            auto end = chrono::high_resolution_clock::now();
+            chrono::duration<double> elapsed = end - start;
+            cout << "Timp de executie: " << elapsed.count() << " secunde.\n";
             canvas.print();
             break;
+        }
         case 5:
-            G.draw(canvas); 
+            G.draw(canvas);
             break;
         default:
             cout << "Optiune invalida.\n";
         }
+
     }
 
     return 0;
