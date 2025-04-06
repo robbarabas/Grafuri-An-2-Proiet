@@ -274,7 +274,7 @@ int main() {
         cout << "2. Cel mai scurt drum (de la un nod sursa)\n";
         cout << "3. Arbore partial minim\n";
         cout << "4. Cuplaje in graf\n";
-        cout << "5. Reseteaza Graficul";
+        cout << "5. Reseteaza Graficul\n";
         cout << "Alege optiunea: ";
         cin >> choice;
         switch (choice) {
